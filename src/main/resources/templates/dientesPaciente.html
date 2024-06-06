@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Odontograma por Cuadrante</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .odontograma-container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+        .row {
+            flex-grow: 1;
+        }
+        .quadrant {
+            border: 1px solid #ddd;
+            padding: 10px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .quadrant ul {
+            display: flex;
+            flex-wrap: wrap;
+            list-style-type: none;
+            padding: 0;
+        }
+        .quadrant ul li {
+            margin: 5px;
+        }
+        .tooth-image {
+            max-width: 50px;
+            max-height: 50px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container odontograma-container">
+        <h1 class="text-center my-4">Dientes del Paciente con ID: <span th:text="${pacienteId}"></span></h1>
+        <div class="row">
+            <div class="col quadrant" th:if="${dientesPorCuadrante.containsKey(1)}">
+                <h2>Cuadrante 1</h2>
+                <ul>
+                    <li th:each="diente : ${dientesPorCuadrante.get(1)}">
+                        <a th:href="@{/diente/details/{id}(id=${diente.id})}">
+                            <img th:src="@{${diente.imagenUrl}}" alt="Imagen del Diente" class="tooth-image"/>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col quadrant" th:if="${dientesPorCuadrante.containsKey(2)}">
+                <h2>Cuadrante 2</h2>
+                <ul>
+                    <li th:each="diente : ${dientesPorCuadrante.get(2)}">
+                        <a th:href="@{/diente/details/{id}(id=${diente.id})}">
+                            <img th:src="@{${diente.imagenUrl}}" alt="Imagen del Diente" class="tooth-image"/>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col quadrant" th:if="${dientesPorCuadrante.containsKey(3)}">
+                <h2>Cuadrante 3</h2>
+                <ul>
+                    <li th:each="diente : ${dientesPorCuadrante.get(3)}">
+                        <a th:href="@{/diente/details/{id}(id=${diente.id})}">
+                            <img th:src="@{${diente.imagenUrl}}" alt="Imagen del Diente" class="tooth-image"/>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col quadrant" th:if="${dientesPorCuadrante.containsKey(4)}">
+                <h2>Cuadrante 4</h2>
+                <ul>
+                    <li th:each="diente : ${dientesPorCuadrante.get(4)}">
+                        <a th:href="@{/diente/details/{id}(id=${diente.id})}">
+                            <img th:src="@{${diente.imagenUrl}}" alt="Imagen del Diente" class="tooth-image"/>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

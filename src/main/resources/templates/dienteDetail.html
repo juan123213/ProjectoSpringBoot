@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalle del Diente</title>
+</head>
+<body>
+    <h1>Detalle del Diente</h1>
+    <form th:action="@{/diente/update/{id}(id=${diente.id})}" th:method="post">
+        <p>Número: <input type="text" name="numero" th:value="${diente.numero}" /></p>
+        <p>Estado: 
+            <select name="estado" th:value="${diente.estado}" id="estado" onchange="updateImageUrl()">
+                <option value="diente ausente" th:selected="${diente.estado == 'diente ausente'}">Diente Ausente</option>
+                <option value="corona en buen estado" th:selected="${diente.estado == 'corona en buen estado'}">Corona en Buen Estado</option>
+                <option value="corona en mal estado" th:selected="${diente.estado == 'corona en mal estado'}">Corona en Mal Estado</option>
+            	<option value="caries dental" th:selected="${diente.estado == 'caries dental'}">Caries dental</option>
+           		<option value="diente indicado de extraccion" th:selected="${diente.estado == 'diente indicado de extraccion'}">Diente indicado de extraccion</option>
+				<option value="fractura de corona dental" th:selected="${diente.estado == 'fractura de corona dental'}">Fractura de corona dental</option>
+				<option value="obturaccion en mal estado" th:selected="${diente.estado == 'obturaccion en mal estado'}">Obturaccion en mal estado</option>
+				<option value="obturaccion en buen estado" th:selected="${diente.estado == 'obturaccion en buen estado'}">Obturaccion en Buen estado</option>
+				<option value="presencia de aparato de ortodoncia" th:selected="${diente.estado == 'presencia de aparato de ortodoncia'}">Presencia de aparato de ortodoncia</option>
+
+            </select>
+        </p>
+        <p>Cuadrante: <input type="text" name="cuadrante" th:value="${diente.cuadrante}" /></p>
+         <input type="hidden" name="imagenUrl" id="imagenUrl" th:value="${diente.imagenUrl}"/>
+        <p>Notas: <input type="text" name="notas" th:value="${diente.notas}" /></p>
+        <input type="hidden" name="paciente" th:value="${diente.paciente}" />
+        <p><button type="submit">Actualizar</button></p>
+    </form>
+    <a th:href="@{/diente/by-paciente/{paciente}(paciente=${diente.paciente})}">Volver a la lista</a>
+
+    <script>
+        function updateImageUrl() {
+            var estado = document.getElementById('estado').value;
+            var imagenUrlInput = document.getElementById('imagenUrl');
+            if (estado === 'diente ausente') {
+                imagenUrlInput.value = '/dienteausente.png';
+            } else if (estado === 'corona en mal estado') {
+                imagenUrlInput.value = '/coronaenmalestado.png';
+            } else if (estado === 'corona en buen estado') {
+                imagenUrlInput.value = '/coronaenbuenestado.png';
+            }
+            else if (estado === 'caries dental') {
+                imagenUrlInput.value = '/cariesdental.png';
+            }
+             else if (estado === 'diente indicado de dextraccion') {
+                imagenUrlInput.value = '/dienteindicadodeextraccion.png';
+            }
+            else if (estado === 'fractura de corona dental') {
+                imagenUrlInput.value = '/fracturadecoronadental.png';
+            }
+            else if (estado === 'obturaccion en mal estado') {
+                imagenUrlInput.value = '/obturaccionenmalestado.png';
+            }
+            else if (estado === 'obturaccion en mal estado') {
+                imagenUrlInput.value = '/obturaccionenbuenestado.png';
+            }
+            else if (estado === 'presencia de aparato de ortodoncia') {
+                imagenUrlInput.value = '/presenciadeaparatodeortodoncia.png';
+            }
+        }
+        // Llama a la función una vez al cargar la página para establecer la imagen correcta.
+        updateImageUrl();
+    </script>
+</body>
+</html>

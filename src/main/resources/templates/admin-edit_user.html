@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Editar Usuario</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <h1 class="my-4">Editar Usuario</h1>
+        <form th:action="@{/admin/users/{id}(id=${user.id})}" th:object="${user}" method="post">
+            <div class="form-group">
+                <label for="username">Nombre de Usuario:</label>
+                <input type="text" class="form-control" id="username" th:field="*{username}" />
+            </div>
+            <div class="form-group">
+                <label for="password">Contraseña:</label>
+                <input type="password" class="form-control" id="password" th:field="*{password}" />
+            </div>
+            <div class="form-group">
+                <label for="roles">Roles:</label>
+                <select class="form-control" id="roles" th:field="*{roles}" multiple>
+                    <option th:each="role : ${roles}" th:value="${role}" th:text="${role.name}"></option>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="/admin/users" class="btn btn-secondary">Volver a la Lista de Usuarios</a>
+        </form>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
